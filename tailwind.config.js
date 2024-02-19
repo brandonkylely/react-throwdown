@@ -7,5 +7,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  /* eslint-env node */
+  plugins: [require("daisyui")],
 }
