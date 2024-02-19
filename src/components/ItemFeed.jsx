@@ -1,17 +1,24 @@
 import axios from "axios";
 import { baseURL } from "../api";
 import { useState, useEffect } from "react";
+import { useAtom } from "jotai";
+import { historyAtom } from "../state";
 
 export default function ItemFeed() {
   const [feed, setFeed] = useState();
+  const [history, setHistory] = useAtom(historyAtom);
 
-  async function fetchAPI() {
-    const response = await axios.get(`${baseURL}/starships`);
-    setFeed(response.data.results);
-    console.log(response.data.results);
+  const handleSetHistory = (item) => {
+    setHistory([...history, item]);
+    console.log(history);
   }
 
   useEffect(() => {
+    async function fetchAPI() {
+      const response = await axios.get(`${baseURL}/starships`);
+      setFeed(response.data.results);
+      console.log(response.data.results);
+    }
     fetchAPI();
     console.log(feed);
   }, []);
@@ -20,7 +27,7 @@ export default function ItemFeed() {
     <div className="relative w-1/3 p-1 float-right border-2">
       <h4 className="text-center">Here&apos;s the Feed!</h4>
       {feed && feed.map((item, index) => (
-        <div className="my-1 max-w-sm w-full lg:max-w-full lg:flex border border-black" key={index}>
+        <button className="my-1 max-w-sm w-full lg:max-w-full lg:flex border border-black" key={index} onClick={() => handleSetHistory(item)}>
         <img className="h-48 p-1 lg:h-auto lg:w-48 flex-none object-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" src="https://www.gstatic.com/webp/gallery/1.jpg" title="Woman holding a mug">
         </img>
         <div className="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
@@ -42,7 +49,7 @@ export default function ItemFeed() {
             </div>
           </div>
         </div>
-      </div>
+      </button>
       ))}
     </div>
   );
