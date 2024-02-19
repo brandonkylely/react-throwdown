@@ -1,10 +1,12 @@
-import Sidebar from "../components/Sidebar";
+// import Sidebar from "../components/Sidebar";
+import ItemFeed from "../components/ItemFeed";
 
 export default function HomePage() {
 
 
 
   return <>
-    <Sidebar />
+    {/* <Sidebar /> */}
+    <ItemFeed />
   </>
 }

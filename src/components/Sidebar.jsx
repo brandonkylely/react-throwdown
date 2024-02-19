@@ -8,7 +8,7 @@ export default function Sidebar() {
   // }
 
   return (
-    <>
+    <div className="">
       <span
         className="absolute text-white text-4xl top-5 left-4 cursor-pointer"
         // onClick="openSidebar()"
@@ -79,6 +79,6 @@ export default function Sidebar() {
           <span className="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
         </div>
       </div>
-    </>
+    </div>
   );
 }
